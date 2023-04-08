@@ -1,6 +1,28 @@
 import { Math } from './Math'
 
 describe('Testing Math libary', () => {
+
+    beforeEach(() => {
+        console.log('beforeEach')
+        //antes de cada teste
+    })
+
+    afterEach(() => {
+        console.log('afterEach')
+        //depois de cada teste
+    })
+
+    beforeAll(() => {
+        console.log('beforeAll')
+        //antes de todos os testes
+    })
+
+    afterAll(() => {
+        console.log('afterAll')
+        //depois de todos os testes
+    })
+
+
     it('should sum two numbers correctly', () => {
         const response = Math.sum(5, 10);
         expect(response).toBe(15);
@@ -63,6 +85,8 @@ describe('Testing Math libary', () => {
         const response = Math.div(10, 0);
         expect(response).toThrow(new Error('Não é possível dividir por zero'));
     })*/
+
+
 
 })
 
