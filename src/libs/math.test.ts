@@ -27,9 +27,42 @@ describe('Testing Math libary', () => {
         expect(response2).toBe(0);
     })
 
-    it.only('contar quantos caracteres tem na string', () => {
+    it('contar quantos caracteres tem na string', () => {
         const response = 'teste'
         expect(response).toHaveLength(5);
     })
+
+    it('verifica se possui a propriedade Email', () => {
+        const response = {
+            name: 'teste',
+            email: 'lucas@gmail.com'
+        }
+        expect(response).toHaveProperty('email');
+    })
+
+    it('verifica se um objeto não é undefined', () => {
+        const response = {
+            name: 'teste',
+            email: 'lucas@gmail.com'
+        }
+        expect(response).not.toBeUndefined();
+    })
+
+    it('verifica se um numero é maior ou igual 18', () => {
+        const response = 20;
+        expect(response).toBeGreaterThanOrEqual(18);
+        //expect(response).toBeLessThanOrEqual(18);
+    })
+
+    it('verifica se possui a propriedade Email', () => {
+        const response = 'lucas@gmail.com'
+        expect(response).toMatch(/^[\w.%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+    })
+
+    /*it.only('retorna um erro', () => {
+        const response = Math.div(10, 0);
+        expect(response).toThrow(new Error('Não é possível dividir por zero'));
+    })*/
+
 })
 
