@@ -1,4 +1,4 @@
-import { User, UserInstance } from '../models/User'
+import { User } from '../models/User'
 import request from 'supertest';
 import app from '../app';
 
@@ -72,6 +72,44 @@ describe('Testing api rountes', () => {
             .then(res => {
                 console.log({ teste: res.body });
                 expect(res.body.error).not.toBeUndefined();
+                return done();
+            })
+    })
+
+    it('should login correctly', (done) => {
+        request(app)
+            .post('/login')
+            .send(`email=${email}&password=${password}`)
+            .then(res => {
+                console.log({ teste: res.body });
+                expect(res.body.error).toBeUndefined();
+                expect(res.body).toHaveProperty('status');
+                expect(res.body.status).toBeTruthy();
+                return done();
+            })
+    })
+
+    it('should not login with incorrect data', (done) => {
+        request(app)
+            .post('/login')
+            .send(`email=${email}&password=invalid`)
+            .then(res => {
+                console.log({ teste: res.body });
+                expect(res.body.error).toBeUndefined();
+                expect(res.body).toHaveProperty('status');
+                expect(res.body.status).toBeFalsy();
+                return done();
+            })
+    })
+
+    it('should list users', (done) => {
+        request(app)
+            .get('/list')
+            .then(res => {
+                expect(res.body.error).toBeUndefined();
+                expect(res.body).toHaveProperty('list');
+                expect(res.body.list.length).toBeGreaterThanOrEqual(1);
+                expect(res.body.list).toContain(email);
                 return done();
             })
     })
