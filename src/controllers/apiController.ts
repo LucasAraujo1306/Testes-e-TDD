@@ -11,11 +11,12 @@ export const register = async (req: Request, res: Response) => {
         const newUser = await userService.createUser(email, password)
 
         if (newUser instanceof Error) {
-            res.json({ error: newUser.message });
+            return res.json({ error: newUser.message });
         } else {
-            res.status(201).json({ id: newUser.id });
+            return res.status(201).json({ id: newUser.id });
         }
     }
+    res.json({ error: 'E-mail e/ou senha não enviados.' });
 }
 
 export const login = async (req: Request, res: Response) => {
