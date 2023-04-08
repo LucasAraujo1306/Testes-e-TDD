@@ -32,5 +32,47 @@ describe('Testing api rountes', () => {
             })
     })
 
+    it('should not allow to register with existing email', (done) => {
+        request(app)
+            .post('/register')
+            .send(`email=${email}&password=${password}`)
+            .then(res => {
+                console.log({ teste: res.body });
+                expect(res.body.error).not.toBeUndefined();
+                return done();
+            })
+    })
 
+    it('should not allow to register without password', (done) => {
+        request(app)
+            .post('/register')
+            .send(`email=${email}`)
+            .then(res => {
+                console.log({ teste: res.body });
+                expect(res.body.error).not.toBeUndefined();
+                return done();
+            })
+    })
+
+    it('should not allow to register without email', (done) => {
+        request(app)
+            .post('/register')
+            .send(`password=${password}`)
+            .then(res => {
+                console.log({ teste: res.body });
+                expect(res.body.error).not.toBeUndefined();
+                return done();
+            })
+    })
+
+    it('should not allow to register without any data', (done) => {
+        request(app)
+            .post('/register')
+            .send()
+            .then(res => {
+                console.log({ teste: res.body });
+                expect(res.body.error).not.toBeUndefined();
+                return done();
+            })
+    })
 })
